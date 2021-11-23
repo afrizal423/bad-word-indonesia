@@ -1,0 +1,30 @@
+{
+    "name": "afrizalmy/bad-word-indonesia",
+    "description": "Package untuk filter kata kotor atau jorok atau jelek menurut bahasa indonesia yang sehari-hari digunakan",
+    "type": "library",
+    "keywords": [
+        "bad words",
+        "swear words",
+        "curse words",
+        "kata kotor",
+        "kata hinaan"
+    ],
+    "homepage": "https://github.com/afrizal423/bad-word-indonesia",
+    "require": {
+        "php": ">=7.0",
+        "phpunit/phpunit": "9.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "afrizal423",
+            "email": "afrizal2499@gmail.com",
+            "homepage": "https://afrizalmy.com/",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"afrizalmy\\BWI\\": "src/"}
+    },
+    "minimum-stability": "dev"
+}
