@@ -26,5 +26,5 @@
     "autoload": {
         "psr-4": {"afrizalmy\\BWI\\": "src/"}
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
