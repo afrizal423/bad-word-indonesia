@@ -56,16 +56,20 @@ class BadWord
      * @param string $masking
      * @return void
      */
-    public static function masking(string $kata, $masking = '*')
+    public static function masking(string $kata, $masking = '*', array $custom_word = [])
     {
         $words = explode(' ', $kata);
         $bad_words = (new self)->kata();
         $new_words = [];
 
         foreach ($words as $word) {
+            $word = preg_replace('/(.)\\1+/', "$1", $word);
+            $tmpword = $word;
+            
             foreach ((new self)->numToChar() as $key => $vokal) {
                 $word = str_replace($key, $vokal, $word);
             }
+
             if (in_array(strtolower($word), $bad_words) || (new self)->Levenshtein($bad_words, $word)) {
                 $replaceString = str_ireplace(['a', 'i', 'u', 'e', 'o'], $masking, $word);
 
@@ -75,8 +79,24 @@ class BadWord
                     $new_words[] = $replaceString;
                 }
             } else {
-                $new_words[] = $word;
+                if (count($custom_word) > 0 && in_array(strtolower($word), $custom_word)) {
+                    if (in_array(strtolower($word), $custom_word) || (new self)->Levenshtein($custom_word, $word)) {
+                        $replaceString = str_ireplace(['a', 'i', 'u', 'e', 'o'], $masking, $word);
+        
+                        if (!strpos($replaceString, $masking)) {
+                            $new_words[] = substr_replace($word, $masking, -1);
+                        } else {
+                            $new_words[] = $replaceString;
+                        }
+                    } else {
+                        $new_words[] = $tmpword;
+                    }
+                } else {
+                    $new_words[] = $tmpword;
+                }
             }
+
+            
         }
         return implode(' ', $new_words);
     }

@@ -24,6 +24,15 @@ echo BadWord::masking('dasar, bangsat kamu ya!');
 
 echo BadWord::masking('dasar, keparat kamu ya!', '#');
 // dasar, k#p#r#t kamu ya!
+
+echo BadWord::masking('dasar, baaaaajiiiingaannn');
+// dasar, b*j*ng*n
+
+/**
+ * Custom word rules
+ * **/
+echo BadWord::masking($str, "*", ['pehape','php']);
+// Yek masih belajar p*h*p* wkwk
 ```
 
 ## Run Test
@@ -34,11 +43,11 @@ Hasil
 ```
 PHPUnit 9.5.0 by Sebastian Bergmann and contributors.
 
-.....                                                               5 / 5 (100%)
+.......                                                             7 / 7 (100%)
 
-Time: 00:00.020, Memory: 4.00 MB
+Time: 00:00.019, Memory: 4.00 MB
 
-OK (5 tests, 5 assertions)
+OK (7 tests, 7 assertions)
 ```
 
 ## Support Me
