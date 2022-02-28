@@ -26,13 +26,13 @@ echo BadWord::masking('dasar, keparat kamu ya!', '#');
 // dasar, k#p#r#t kamu ya!
 
 echo BadWord::masking('dasar, baaaaajiiiingaannn');
-// dasar, b*j*ng*n
+// dasar, b*****j****ng**nnn
 
 /**
  * Custom word rules
  * **/
-echo BadWord::masking($str, "*", ['pehape','php']);
-// Yek masih belajar p*h*p* wkwk
+echo BadWord::masking('Yekkk masih belajar pehape wkwk', "*", ['pehape','php']);
+// Yekkk masih belajar p*h*p* wkwk
 ```
 
 ## Run Test

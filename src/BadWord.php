@@ -63,15 +63,16 @@ class BadWord
         $new_words = [];
 
         foreach ($words as $word) {
-            $word = preg_replace('/(.)\\1+/', "$1", $word);
             $tmpword = $word;
+            $word = preg_replace('/(.)\\1+/', "$1", $word);
+            
             
             foreach ((new self)->numToChar() as $key => $vokal) {
                 $word = str_replace($key, $vokal, $word);
             }
 
             if (in_array(strtolower($word), $bad_words) || (new self)->Levenshtein($bad_words, $word)) {
-                $replaceString = str_ireplace(['a', 'i', 'u', 'e', 'o'], $masking, $word);
+                $replaceString = str_ireplace(['a', 'i', 'u', 'e', 'o'], $masking, $tmpword);
 
                 if (!strpos($replaceString, $masking)) {
                     $new_words[] = substr_replace($word, $masking, -1);
@@ -81,7 +82,7 @@ class BadWord
             } else {
                 if (count($custom_word) > 0 && in_array(strtolower($word), $custom_word)) {
                     if (in_array(strtolower($word), $custom_word) || (new self)->Levenshtein($custom_word, $word)) {
-                        $replaceString = str_ireplace(['a', 'i', 'u', 'e', 'o'], $masking, $word);
+                        $replaceString = str_ireplace(['a', 'i', 'u', 'e', 'o'], $masking, $tmpword);
         
                         if (!strpos($replaceString, $masking)) {
                             $new_words[] = substr_replace($word, $masking, -1);

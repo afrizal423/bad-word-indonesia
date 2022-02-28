@@ -17,38 +17,38 @@ class BadWordTest extends TestCase
         $t = BadWord::masking($str);
         $this->assertEquals($str, $t); 
     }
-    public function testFailurelWordsCek()
+    public function testlWordsCek()
     {
         $str = 'dasar, kamu bajingan ya!';
         $t = BadWord::cek($str);
         $this->assertEquals(true, $t); 
     }
-    public function testFailureWordsMasking()
+    public function testWordsMasking()
     {
         $str = 'dasar, kamu bajingan ya!';
         $t = BadWord::masking($str);
         $this->assertEquals('dasar, kamu b*j*ng*n ya!', $t); 
     }
-    public function testFailureWordsMaskingCustom()
+    public function testWordsMaskingCustom()
     {
         $str = 'dasar, kamu bajingan ya!';
         $t = BadWord::masking($str,'#');
         $this->assertEquals('dasar, kamu b#j#ng#n ya!', $t); 
     }
 
-    public function testFailureWordsMaskingCustomWithDuplicateVokalChar()
+    public function testWordsMaskingCustomWithDuplicateVokalChar()
     {
         $str = 'dasar, baaaaajiiiingaannn';
         $t = BadWord::masking($str);
-        $this->assertEquals('dasar, b*j*ng*n', $t); 
+        $this->assertEquals('dasar, b*****j****ng**nnn', $t); 
     }
 
-    public function testFailureWordsMaskingWithCustomRules()
+    public function testWordsMaskingWithCustomRules()
     {
         $str = 'Yekkk masih belajar pehape wkwk';
         $t = BadWord::masking($str, "*", [
             'pehape'
         ]);
-        $this->assertEquals('Yek masih belajar p*h*p* wkwk', $t); 
+        $this->assertEquals('Yekkk masih belajar p*h*p* wkwk', $t); 
     }
 }
