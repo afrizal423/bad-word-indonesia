@@ -15,7 +15,7 @@ class BadWord
      * @param string $word
      * @return boolean
      */
-    public function Levenshtein(array $wordCollect, string $word): bool
+    private function Levenshtein(array $wordCollect, string $word): bool
     {
         foreach ($wordCollect as $bad) {
             if (levenshtein($word, $bad) <= 1) {
@@ -23,6 +23,22 @@ class BadWord
             }
         }
         return false;
+    }
+
+    /**
+     * Proses case folding text menghapus symbol.emoji
+     *
+     * @param string $value
+     * @return string
+     */
+    private function caseFolding(string $value): string
+    {
+        // hapus emoji dan simbol
+        $str = preg_replace('/[^\p{L}\p{N}\s]/u', '', $value);
+        // text to lower case
+        $str = mb_convert_case($str, MB_CASE_LOWER, "UTF-8");
+               
+        return $str;
     }
 
     /**
@@ -65,7 +81,7 @@ class BadWord
         foreach ($words as $word) {
             $tmpword = $word;
             $word = preg_replace('/(.)\\1+/', "$1", $word);
-            
+            $word = (new self)->caseFolding($word);
             
             foreach ((new self)->numToChar() as $key => $vokal) {
                 $word = str_replace($key, $vokal, $word);

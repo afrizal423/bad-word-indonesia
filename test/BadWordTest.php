@@ -43,12 +43,26 @@ class BadWordTest extends TestCase
         $this->assertEquals('dasar, b*****j****ng**nnn', $t); 
     }
 
+    public function testWordsMaskingWithDuplicateVokalCharWithSymbol()
+    {
+        $str = 'dasar, baaaaajiiiingaannn!!!, kamu "cok", "asuu"';
+        $t = BadWord::masking($str);
+        $this->assertEquals('dasar, b*****j****ng**nnn!!!, kamu "c*k", "*s**"', $t); 
+    }
+
+    public function testWordsMaskingWithDuplicateVokalCharWithSymbols()
+    {
+        $str = 'dasar, baaaaajiiiingaannn!!!, kamu "(c){ok}", ko(o)ntol';
+        $t = BadWord::masking($str);
+        $this->assertEquals('dasar, b*****j****ng**nnn!!!, kamu "(c){*k}", k*(*)nt*l', $t); 
+    }
+
     public function testWordsMaskingWithCustomRules()
     {
-        $str = 'Yekkk masih belajar pehape wkwk';
+        $str = 'Ih masih belajar pehape wkwk';
         $t = BadWord::masking($str, "*", [
             'pehape'
         ]);
-        $this->assertEquals('Yekkk masih belajar p*h*p* wkwk', $t); 
+        $this->assertEquals('Ih masih belajar p*h*p* wkwk', $t); 
     }
 }
