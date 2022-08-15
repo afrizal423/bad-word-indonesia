@@ -39,16 +39,7 @@ echo BadWord::masking('Yekkk masih belajar pehape wkwk', "*", ['pehape','php']);
 ```bash
 vendor\bin\phpunit test\BadWordTest.php
 ```
-Hasil
-```
-PHPUnit 9.5.0 by Sebastian Bergmann and contributors.
 
-.......                                                             7 / 7 (100%)
-
-Time: 00:00.019, Memory: 4.00 MB
-
-OK (7 tests, 7 assertions)
-```
 
 ## Support Me
 Dukung aku [https://saweria.co/afrizalmy](https://saweria.co/afrizalmy)
