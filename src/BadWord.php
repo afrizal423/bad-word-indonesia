@@ -70,9 +70,10 @@ class BadWord
      *
      * @param string $kata
      * @param string $masking
-     * @return void
+     * @param array $custom_word
+     * @return string
      */
-    public static function masking(string $kata, $masking = '*', array $custom_word = [])
+    public static function masking(string $kata, $masking = '*', array $custom_word = []): string
     {
         $words = explode(' ', $kata);
         $bad_words = (new self)->kata();
